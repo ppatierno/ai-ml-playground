@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <langchain4j.version>0.32.0</langchain4j.version>
         <kafka.version>3.7.1</kafka.version>
+        <jetty.version>9.4.54.v20240208</jetty.version>
         <log4j.version>2.23.1</log4j.version>
         <tinylog.version>2.7.0</tinylog.version>
     </properties>
@@ -49,6 +50,11 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
         <!-- Logging -->
         <dependency>
