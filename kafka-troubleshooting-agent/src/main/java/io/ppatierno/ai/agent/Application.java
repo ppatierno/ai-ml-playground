@@ -61,16 +61,31 @@ public class Application {
             .logResponses(true)
             .build();*/
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         KafkaTroubleshooterAgent kafkaTroubleshooterAgent = AiServices.builder(KafkaTroubleshooterAgent.class)
                 .chatLanguageModel(model)
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(10))
                 .tools(new KafkaAdminTool())
                 .build();
 
+        /*
         String answer = kafkaTroubleshooterAgent.chat("Hi, please return the topics list for the Apache Kafka cluster with bootstrap servers localhost:9092");
         LOGGER.info(answer);
         answer = kafkaTroubleshooterAgent.chat("Describe the topic with name \"my-topic\".");
         LOGGER.info(answer);
+        */
+
+        KafkaTroubleshooterServer kafkaTroubleshooterServer = new KafkaTroubleshooterServer(kafkaTroubleshooterAgent);
+        kafkaTroubleshooterServer.startHttpServer();
+        LOGGER.info("KafkaTroubleshooterServer started!");
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                kafkaTroubleshooterServer.stopHttpServer();
+                LOGGER.info("KafkaTroubleshooterServer stopped!");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
 }
