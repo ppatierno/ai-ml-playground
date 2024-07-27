@@ -21,13 +21,12 @@ public class Application {
 
     private static final Logger LOGGER = LogManager.getLogger(Application.class);
 
-
     // with running localAI on laptop but interacting via standard OpenAI API
     /*private static ChatLanguageModel model = OpenAiChatModel.builder()
             .baseUrl("http://localhost:8080")
             //.modelName("mistral-7b-instruct-v0.3")
             .modelName("LocalAI-llama3-8b-function-call-v0.2")
-            .apiKey(System.getenv("OPENAI_API_KEY"))
+            .apiKey(System.getenv("OPENAI_API_KEY")) // "localai"
             .timeout(Duration.ofHours(1))
             .logRequests(true)
             .logResponses(true)
@@ -45,12 +44,12 @@ public class Application {
             .build();*/
 
     // to use with Azure OpenAI service
-    private static ChatLanguageModel model = AzureOpenAiChatModel.builder()
+    /*private static ChatLanguageModel model = AzureOpenAiChatModel.builder()
             .apiKey(System.getenv("AZURE_OPENAI_KEY"))
             .endpoint(System.getenv("AZURE_OPENAI_ENDPOINT"))
             .deploymentName(System.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"))
             .logRequestsAndResponses(true)
-            .build();
+            .build();*/
 
     // with running ollama locally (not working, langchain4j doesn't support tools with it)
     /*private static ChatLanguageModel model = OllamaChatModel.builder()
@@ -60,6 +59,16 @@ public class Application {
             .logRequests(true)
             .logResponses(true)
             .build();*/
+
+    // with running ollama locally but interacting via standard OpenAI API
+    private static ChatLanguageModel model = OpenAiChatModel.builder()
+            .baseUrl("http://localhost:11434/v1")
+            .modelName("llama3.1")
+            .apiKey(System.getenv("OPENAI_API_KEY")) // "ollama"
+            .timeout(Duration.ofHours(1))
+            .logRequests(true)
+            .logResponses(true)
+            .build();
 
     public static void main(String[] args) throws Exception {
         KafkaTroubleshooterAgent kafkaTroubleshooterAgent = AiServices.builder(KafkaTroubleshooterAgent.class)
