@@ -5,6 +5,7 @@
 package io.ppatierno.ai.service;
 
 import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.KafkaAdminClient;
 
 import java.util.Properties;
@@ -41,7 +42,7 @@ public class KafkaAdminService {
 
     private AdminClient create(String bootstrapServers) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", bootstrapServers);
+        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         this.bootstrapServers = bootstrapServers;
         this.adminClient = KafkaAdminClient.create(props);
         return this.adminClient;
