@@ -17,8 +17,8 @@ import java.net.http.HttpResponse;
  */
 public class KafkaTroubleshooterClient {
 
-    private HttpClient client;
-    private URI agentEndpoint;
+    private final HttpClient client;
+    private final URI agentEndpoint;
 
     /**
      * Constructor

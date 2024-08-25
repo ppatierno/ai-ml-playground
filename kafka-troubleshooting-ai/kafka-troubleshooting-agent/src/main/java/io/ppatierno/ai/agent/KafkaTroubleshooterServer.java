@@ -37,6 +37,7 @@ public class KafkaTroubleshooterServer {
     public KafkaTroubleshooterServer(KafkaTroubleshooterAgent kafkaTroubleshooterAgent) {
         this.kafkaTroubleshooterAgent = kafkaTroubleshooterAgent;
     }
+
     public void startHttpServer() throws Exception {
         server = new Server();
         ServerConnector connector = new ServerConnector(server);
