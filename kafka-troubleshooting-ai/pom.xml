@@ -14,7 +14,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <langchain4j.version>0.36.2</langchain4j.version>
-        <kafka.version>3.9.0</kafka.version>
+        <kafka.version>4.0.0</kafka.version>
         <jetty.version>9.4.54.v20240208</jetty.version>
         <log4j.version>2.23.1</log4j.version>
         <tinylog.version>2.7.0</tinylog.version>
